@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+
+{% block title %}
+    Driver Standings
+{% endblock %}
+
+{% block content %}
+    <form method="POST" class="w-25 mx-auto">
+        <div class="mb-3">
+            <label for="year" class="form-label">Enter Year:</label>
+            <input type="number" class="form-control" id="year" name="year">
+        </div>
+        <div class="mb-3">
+            <label for="rnd" class="form-label">Enter Round:</label>
+            <input type="number" class="form-control" id="rnd" name="rnd">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    {% if drivers %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">Wins</th>
+            <th scope="col">Team</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for driver in drivers %}
+                <tr>
+                    <th>{{ driver.first_name }} {{ driver['last_name'] }}</th>
+                    <td>{{ driver.DOB }}</td>
+                    <td>{{ driver.wins }}</td>
+                    <td>{{ driver.team }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+{% endblock %}
