@@ -1,3 +1,42 @@
 body {
+    background: #2BC0E4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #EAECC6, #2BC0E4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #EAECC6, #2BC0E4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: 'Roboto', sans-serif;
+}
+
+img {
+    width: 100px;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+form,h1 {
+    margin: 20px;
+}
+
+h1 {
+    font-weight: 100;
+    font-size: 48px;
+}
+
+.btn {
+    padding: 12px 36px!important;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
     background-color: white;
+    width: 40%;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.form-control:focus {
+    border: 1px solid #1f1f1f;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

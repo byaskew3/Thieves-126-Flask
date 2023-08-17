@@ -1,12 +1,12 @@
 from flask import request, render_template
 import requests
 from app import app
-from .forms import LoginForm
+from .forms import LoginForm, SignupForm
 
 @app.route('/')
 @app.route('/home')
 def home():
-    return 'This is the thieves home page'
+    return render_template('home.html')
 
 # fake database
 REGISTERED_USERS = {
@@ -30,7 +30,21 @@ def login():
     else:
         print('not validated')
         return render_template('login.html', form=form)
-
+    
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = SignupForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        name = f'{form.first_name.data} {form.last_name.data}'
+        email = form.email.data
+        password = form.password.data
+        REGISTERED_USERS[email] = {
+            'name': name,
+            'password': password
+        }
+        return f'Thank you for registering {name}!'
+    else:
+        return render_template('signup.html', form=form)
 
 @app.route('/students')
 def students():
