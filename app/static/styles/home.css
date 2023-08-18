@@ -1,0 +1,17 @@
+nav {
+    font-family: 'Roboto', 'sans-serif';
+}
+
+li a {
+    font-weight: 100;
+}
+
+li {
+    list-style: none;
+}
+
+img {
+    width: 60px;
+    border-radius: 50%;
+}
+
