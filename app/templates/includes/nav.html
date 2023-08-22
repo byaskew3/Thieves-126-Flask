@@ -10,25 +10,31 @@
           {% if current_user.is_authenticated %}
           <div class="d-flex">
             <li class="nav-item">
-              <a class="nav-link m-3" aria-current="page" href="{{ url_for('home') }}">Home</a>
+              <a class="nav-link m-3" aria-current="page" href="{{ url_for('main.home') }}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link m-3" href="{{ url_for('driver_standings') }}">Driver Standings</a>
+              <a class="nav-link m-3" href="{{ url_for('main.driver_standings') }}">Driver Standings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link m-3" href="{{ url_for('posts.create_post') }}">Create a Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link m-3" href="{{ url_for('posts.feed') }}">Feed</a>
             </li>
           </div>
           <div>
             <p class="fw-light">Hello, {{ current_user.first_name }}</p>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}">Logout</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('auth.logout') }}">Logout</a>
             </li>
           </div>
           {% else %}
           <div>
             <li class="nav-item">
-              <a class="nav-link me-3" aria-current="page" href="{{ url_for('login') }}">Login</a>
+              <a class="nav-link me-3" aria-current="page" href="{{ url_for('auth.login') }}">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{{ url_for('signup') }}">Signup</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('auth.signup') }}">Signup</a>
             </li>
           </div>
           {% endif %}

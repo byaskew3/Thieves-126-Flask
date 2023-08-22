@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block title %}
+    Feed Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="../static/styles/home.css">
+{% endblock %}
+
+{% block content %}
+{% include './includes/nav.html'%}
+    {% for post in posts %}
+        <div class="card mx-auto" style="width: 18rem;">
+            <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}">
+            <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.caption }}</p>
+            {% if current_user.id == post.user_id %}
+                <a href="#" class="btn btn-success">Update</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

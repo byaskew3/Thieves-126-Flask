@@ -18,3 +18,18 @@ class User(db.Model, UserMixin):
         self.last_name = last_name
         self.email = email
         self.password = generate_password_hash(password)
+
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    caption = db.Column(db.String)
+    img_url = db.Column(db.String, nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, title, caption, img_url, user_id):
+        self.title = title
+        self.caption = caption
+        self.img_url = img_url
+        self.user_id = user_id

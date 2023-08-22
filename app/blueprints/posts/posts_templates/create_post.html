@@ -1,0 +1,29 @@
+{% extends 'base.html '%}
+
+{% block styles %}
+  <link rel="stylesheet" href="../static/styles/login.css">
+{% endblock %}
+
+{% block title %}
+  Create a Post
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+      <img src="https://coursereport-s3-production.global.ssl.fastly.net/uploads/school/logo/219/original/CT_LOGO_NEW.jpg" alt="Coding Temple Logo">
+      <h1>Create Post</h1>
+      <form method="POST" class="w-50 mx-auto">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">
+              {{ form.title(class='form-control', placeholder='Title')}}
+          </div>
+          <div class="mb-3">
+              {{ form.caption(class='form-control', placeholder='Caption')}}
+          </div>
+          <div class="mb-3">
+            {{ form.img_url(class='form-control', placeholder='Image URL')}}
+          </div>
+          {{ form.submit_btn(class='btn btn-dark d-block mx-auto') }}
+      </form>
+  </div>
+{% endblock %}
