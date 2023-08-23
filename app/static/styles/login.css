@@ -11,6 +11,10 @@ img {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+li {
+    list-style: none;
+}
+
 form,h1 {
     margin: 20px;
 }

@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+
+{% block title %}
+    Update Post Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="../../../static/styles/login.css">
+{% endblock %}
+
+{% block content %}
+{% include './includes/nav.html'%}
+    <h1 class="text-center">Update Post</h1>
+    <div class="card mx-auto" style="width: 18rem;">
+        <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}">
+        <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.caption }}</p>
+        <div>
+            <form method="POST" class="mx-auto">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.title(class='form-control', value=post.title)}}
+                </div>
+                <div class="mb-3">
+                    {{ form.caption(class='form-control', value=post.caption)}}
+                </div>
+                <div class="mb-3">
+                  {{ form.img_url(class='form-control', value=post.img_url)}}
+                </div>
+                {{ form.submit_btn(class='form-control btn btn-dark', value='Update')}}
+                <button type="button" class="btn btn-danger w-100 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Delete
+                </button>
+            </form>
+            <!-- Button trigger modal -->
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure you want to delete {{ post.title}}?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    THIS CANNOT BE UNDONE!
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{{ url_for('posts.delete_post', post_id=post.id) }}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

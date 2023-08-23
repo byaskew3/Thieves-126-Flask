@@ -1,12 +1,47 @@
 from . import main
-from flask import render_template, request
-from flask_login import login_required
+from flask import render_template, request, flash, redirect, url_for
+from flask_login import login_required, current_user
 import requests
+from app.models import User, db
 
 @main.route('/')
 @main.route('/home')
 def home():
-    return render_template('home.html')
+    users = User.query.all()
+    for user in users:
+        if user in current_user.followed:
+            user.isFollowed = True
+    return render_template('home.html', users=users)
+
+# follow functionality
+@main.route('/follow/<int:user_id>')
+@login_required
+def follow(user_id):
+    user = User.query.get(user_id)
+
+    # add user to followed list
+    current_user.followed.append(user)
+
+    # commit changes to database
+    db.session.commit()
+
+    flash(f'Successfully followed {user.first_name}!', 'success')
+    return redirect(url_for('main.home'))
+
+# unfollow functionality
+@main.route('/unfollow/<int:user_id>')
+@login_required
+def unfollow(user_id):
+    user = User.query.get(user_id)
+
+    # remove user from followed list
+    current_user.followed.remove(user)
+
+    # commit changes to db
+    db.session.commit()
+
+    flash(f'You unfollowed {user.first_name}!', 'info')
+    return redirect(url_for('main.home'))
 
 @main.route('/f1/driverStandings', methods=['GET', 'POST'])
 @login_required

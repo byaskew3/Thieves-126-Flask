@@ -10,5 +10,20 @@
 
 {% block content %}
 {% include './includes/nav.html'%}
-<h1>This is the Thieves Homepage</h1>
+    <h1 class="text-center">This is the Thieves Homepage</h1>
+    {% for user in users %}
+        {% if current_user.id != user.id %}
+            <div class="card mx-auto mt-3" style="width: 18rem;">
+                <img src="{{ url_for('static', filename='/images/thievesbglogo.png')}}" class="card-img-top" alt="thieves logo">
+                <div class="card-body">
+                <h5 class="card-title">{{ user.first_name }} {{ user.last_name[0] }}.</h5>
+                {% if user.isFollowed %}
+                    <a href="{{ url_for('main.unfollow', user_id=user.id) }}" class="btn d-block btn-danger w-50 mx-auto mt-3">Unfollow</a>
+                {% else %}
+                    <a href="{{ url_for('main.follow', user_id=user.id) }}" class="btn d-block btn-dark w-50 mx-auto mt-3">Follow</a>
+                {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}

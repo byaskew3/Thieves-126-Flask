@@ -3,6 +3,7 @@ from config import Config
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from .models import db, User
+from flask_moment import Moment
 
 def create_app():
 
@@ -11,10 +12,12 @@ def create_app():
     app.config.from_object(Config)
 
     login_manager = LoginManager()
+    moment = Moment()
 
     db.init_app(app)
     migrate = Migrate(app, db)
     login_manager.init_app(app)
+    moment.init_app(app)
 
     # login manager settings
     login_manager.login_view = 'login'

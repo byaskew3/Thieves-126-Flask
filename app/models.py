@@ -5,6 +5,12 @@ from flask_login import UserMixin
 
 db = SQLAlchemy()
 
+followers = db.Table(
+    'followers',
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+)
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String, nullable=False)
@@ -12,6 +18,14 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    followed = db.relationship(
+        'User', secondary=followers,
+        primaryjoin = (followers.columns.follower_id == id),
+        secondaryjoin = (followers.columns.followed_id == id),
+        backref = db.backref('followers', lazy='dynamic'),
+        lazy='dynamic'
+    )
 
     def __init__(self, first_name, last_name, email, password):
         self.first_name = first_name
