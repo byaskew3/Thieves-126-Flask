@@ -6,6 +6,7 @@ from app.models import User, db
 
 @main.route('/')
 @main.route('/home')
+@login_required
 def home():
     users = User.query.all()
     for user in users:
